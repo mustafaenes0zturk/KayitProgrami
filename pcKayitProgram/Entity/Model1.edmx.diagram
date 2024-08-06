@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f2caa8c164784a909a0b8f0757601a5c" Name="Diagram1" ZoomLevel="65">
+        <EntityTypeShape EntityType="dbPcKayitModel.DepartmanTablo" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPcKayitModel.PersonelTablosu" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPcKayitModel.SirketTablo" Width="1.5" PointX="7.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPcKayitModel.UnvanTablo" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="dbPcKayitModel.FK_PersonelTablosu_DepartmanTablo2" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPcKayitModel.FK_PersonelTablosu_SirketTablo3" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPcKayitModel.FK_PersonelTablosu_UnvanTablo3" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbPcKayitModel.BilgisayarTABLO" Width="1.5" PointX="1.5" PointY="5.75" />
+        <EntityTypeShape EntityType="dbPcKayitModel.ProgramTABLO" Width="1.5" PointX="1" PointY="1.5" />
+        <AssociationConnector Association="dbPcKayitModel.FK__Bilgisaya__Perso__3B0BC30C" />
+        <EntityTypeShape EntityType="dbPcKayitModel.ProgramBilgisayar" Width="1.5" PointX="3.25" PointY="2" />
+        <AssociationConnector Association="dbPcKayitModel.FK__ProgramBi__Bilgi__43A1090D" />
+        <AssociationConnector Association="dbPcKayitModel.FK__ProgramBi__Progr__44952D46" />
+        <EntityTypeShape EntityType="dbPcKayitModel.KullaniciTablo" Width="2.375" PointX="7.375" PointY="0.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

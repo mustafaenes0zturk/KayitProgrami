@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbPcKayitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BilgisayarTABLO">
+          <Key>
+            <PropertyRef Name="BilgisayarID" />
+          </Key>
+          <Property Name="BilgisayarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BilgisayarAdi" Type="nvarchar" MaxLength="100" />
+          <Property Name="BilgisayarModeli" Type="nvarchar" MaxLength="100" />
+          <Property Name="PersonelID" Type="int" />
+          <Property Name="KurulumTarihi" Type="date" />
+        </EntityType>
+        <EntityType Name="DepartmanTablo">
+          <Key>
+            <PropertyRef Name="DepartmanID" />
+          </Key>
+          <Property Name="DepartmanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmanAdi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="KullaniciTablo">
+          <Key>
+            <PropertyRef Name="KullaniciID" />
+          </Key>
+          <Property Name="KullaniciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciGirisAdi" Type="nvarchar" MaxLength="100" />
+          <Property Name="KullaniciSifre" Type="nvarchar" MaxLength="100" />
+          <Property Name="KullaniciAdiGercek" Type="nvarchar" MaxLength="100" />
+          <Property Name="KullaniciMail" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PersonelTablosu">
+          <Key>
+            <PropertyRef Name="PersonelID" />
+          </Key>
+          <Property Name="PersonelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonelAdi" Type="nvarchar" MaxLength="80" />
+          <Property Name="UnvanID" Type="int" />
+          <Property Name="SirketID" Type="int" />
+          <Property Name="DepartmanID" Type="int" />
+          <Property Name="PersonelTel" Type="nvarchar" MaxLength="80" />
+          <Property Name="PersonelMail" Type="nvarchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="ProgramBilgisayar">
+          <Key>
+            <PropertyRef Name="ComputerProgramID" />
+          </Key>
+          <Property Name="ComputerProgramID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BilgisayarID" Type="int" />
+          <Property Name="ProgramID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProgramTABLO">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramAdi" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SirketTablo">
+          <Key>
+            <PropertyRef Name="SirketID" />
+          </Key>
+          <Property Name="SirketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SirketAdi" Type="nvarchar" MaxLength="80" />
+          <Property Name="SirketTel" Type="nvarchar" MaxLength="100" />
+          <Property Name="SirketAdres" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="UnvanTablo">
+          <Key>
+            <PropertyRef Name="UnvanID" />
+          </Key>
+          <Property Name="UnvanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UnvanAdi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Bilgisaya__Perso__3B0BC30C">
+          <End Role="PersonelTablosu" Type="Self.PersonelTablosu" Multiplicity="0..1" />
+          <End Role="BilgisayarTABLO" Type="Self.BilgisayarTABLO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonelTablosu">
+              <PropertyRef Name="PersonelID" />
+            </Principal>
+            <Dependent Role="BilgisayarTABLO">
+              <PropertyRef Name="PersonelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProgramBi__Bilgi__43A1090D">
+          <End Role="BilgisayarTABLO" Type="Self.BilgisayarTABLO" Multiplicity="0..1" />
+          <End Role="ProgramBilgisayar" Type="Self.ProgramBilgisayar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BilgisayarTABLO">
+              <PropertyRef Name="BilgisayarID" />
+            </Principal>
+            <Dependent Role="ProgramBilgisayar">
+              <PropertyRef Name="BilgisayarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProgramBi__Progr__44952D46">
+          <End Role="ProgramTABLO" Type="Self.ProgramTABLO" Multiplicity="0..1" />
+          <End Role="ProgramBilgisayar" Type="Self.ProgramBilgisayar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramTABLO">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="ProgramBilgisayar">
+              <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonelTablosu_DepartmanTablo2">
+          <End Role="DepartmanTablo" Type="Self.DepartmanTablo" Multiplicity="0..1" />
+          <End Role="PersonelTablosu" Type="Self.PersonelTablosu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmanTablo">
+              <PropertyRef Name="DepartmanID" />
+            </Principal>
+            <Dependent Role="PersonelTablosu">
+              <PropertyRef Name="DepartmanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonelTablosu_SirketTablo3">
+          <End Role="SirketTablo" Type="Self.SirketTablo" Multiplicity="0..1" />
+          <End Role="PersonelTablosu" Type="Self.PersonelTablosu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SirketTablo">
+              <PropertyRef Name="SirketID" />
+            </Principal>
+            <Dependent Role="PersonelTablosu">
+              <PropertyRef Name="SirketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonelTablosu_UnvanTablo3">
+          <End Role="UnvanTablo" Type="Self.UnvanTablo" Multiplicity="0..1" />
+          <End Role="PersonelTablosu" Type="Self.PersonelTablosu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnvanTablo">
+              <PropertyRef Name="UnvanID" />
+            </Principal>
+            <Dependent Role="PersonelTablosu">
+              <PropertyRef Name="UnvanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbPcKayitModelStoreContainer">
+          <EntitySet Name="BilgisayarTABLO" EntityType="Self.BilgisayarTABLO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepartmanTablo" EntityType="Self.DepartmanTablo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KullaniciTablo" EntityType="Self.KullaniciTablo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonelTablosu" EntityType="Self.PersonelTablosu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProgramBilgisayar" EntityType="Self.ProgramBilgisayar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProgramTABLO" EntityType="Self.ProgramTABLO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SirketTablo" EntityType="Self.SirketTablo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnvanTablo" EntityType="Self.UnvanTablo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Bilgisaya__Perso__3B0BC30C" Association="Self.FK__Bilgisaya__Perso__3B0BC30C">
+            <End Role="PersonelTablosu" EntitySet="PersonelTablosu" />
+            <End Role="BilgisayarTABLO" EntitySet="BilgisayarTABLO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProgramBi__Bilgi__43A1090D" Association="Self.FK__ProgramBi__Bilgi__43A1090D">
+            <End Role="BilgisayarTABLO" EntitySet="BilgisayarTABLO" />
+            <End Role="ProgramBilgisayar" EntitySet="ProgramBilgisayar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProgramBi__Progr__44952D46" Association="Self.FK__ProgramBi__Progr__44952D46">
+            <End Role="ProgramTABLO" EntitySet="ProgramTABLO" />
+            <End Role="ProgramBilgisayar" EntitySet="ProgramBilgisayar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonelTablosu_DepartmanTablo2" Association="Self.FK_PersonelTablosu_DepartmanTablo2">
+            <End Role="DepartmanTablo" EntitySet="DepartmanTablo" />
+            <End Role="PersonelTablosu" EntitySet="PersonelTablosu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonelTablosu_SirketTablo3" Association="Self.FK_PersonelTablosu_SirketTablo3">
+            <End Role="SirketTablo" EntitySet="SirketTablo" />
+            <End Role="PersonelTablosu" EntitySet="PersonelTablosu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonelTablosu_UnvanTablo3" Association="Self.FK_PersonelTablosu_UnvanTablo3">
+            <End Role="UnvanTablo" EntitySet="UnvanTablo" />
+            <End Role="PersonelTablosu" EntitySet="PersonelTablosu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbPcKayitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DepartmanTablo">
+          <Key>
+            <PropertyRef Name="DepartmanID" />
+          </Key>
+          <Property Name="DepartmanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmanAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PersonelTablosu" Relationship="Self.FK_PersonelTablosu_DepartmanTablo2" FromRole="DepartmanTablo" ToRole="PersonelTablosu" />
+        </EntityType>
+        <EntityType Name="PersonelTablosu">
+          <Key>
+            <PropertyRef Name="PersonelID" />
+          </Key>
+          <Property Name="PersonelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonelAdi" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="UnvanID" Type="Int32" />
+          <Property Name="SirketID" Type="Int32" />
+          <Property Name="DepartmanID" Type="Int32" />
+          <Property Name="PersonelTel" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="PersonelMail" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepartmanTablo" Relationship="Self.FK_PersonelTablosu_DepartmanTablo2" FromRole="PersonelTablosu" ToRole="DepartmanTablo" />
+          <NavigationProperty Name="SirketTablo" Relationship="Self.FK_PersonelTablosu_SirketTablo3" FromRole="PersonelTablosu" ToRole="SirketTablo" />
+          <NavigationProperty Name="UnvanTablo" Relationship="Self.FK_PersonelTablosu_UnvanTablo3" FromRole="PersonelTablosu" ToRole="UnvanTablo" />
+          <NavigationProperty Name="BilgisayarTABLO" Relationship="dbPcKayitModel.FK__Bilgisaya__Perso__3B0BC30C" FromRole="PersonelTablosu" ToRole="BilgisayarTABLO" />
+        </EntityType>
+        <EntityType Name="SirketTablo">
+          <Key>
+            <PropertyRef Name="SirketID" />
+          </Key>
+          <Property Name="SirketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SirketAdi" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="SirketTel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SirketAdres" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PersonelTablosu" Relationship="Self.FK_PersonelTablosu_SirketTablo3" FromRole="SirketTablo" ToRole="PersonelTablosu" />
+        </EntityType>
+        <EntityType Name="UnvanTablo">
+          <Key>
+            <PropertyRef Name="UnvanID" />
+          </Key>
+          <Property Name="UnvanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UnvanAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PersonelTablosu" Relationship="Self.FK_PersonelTablosu_UnvanTablo3" FromRole="UnvanTablo" ToRole="PersonelTablosu" />
+        </EntityType>
+        <Association Name="FK_PersonelTablosu_DepartmanTablo2">
+          <End Role="DepartmanTablo" Type="Self.DepartmanTablo" Multiplicity="0..1" />
+          <End Role="PersonelTablosu" Type="Self.PersonelTablosu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmanTablo">
+              <PropertyRef Name="DepartmanID" />
+            </Principal>
+            <Dependent Role="PersonelTablosu">
+              <PropertyRef Name="DepartmanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonelTablosu_SirketTablo3">
+          <End Role="SirketTablo" Type="Self.SirketTablo" Multiplicity="0..1" />
+          <End Role="PersonelTablosu" Type="Self.PersonelTablosu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SirketTablo">
+              <PropertyRef Name="SirketID" />
+            </Principal>
+            <Dependent Role="PersonelTablosu">
+              <PropertyRef Name="SirketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonelTablosu_UnvanTablo3">
+          <End Role="UnvanTablo" Type="Self.UnvanTablo" Multiplicity="0..1" />
+          <End Role="PersonelTablosu" Type="Self.PersonelTablosu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnvanTablo">
+              <PropertyRef Name="UnvanID" />
+            </Principal>
+            <Dependent Role="PersonelTablosu">
+              <PropertyRef Name="UnvanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbPcKayitEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DepartmanTablo" EntityType="Self.DepartmanTablo" />
+          <EntitySet Name="PersonelTablosu" EntityType="Self.PersonelTablosu" />
+          <EntitySet Name="SirketTablo" EntityType="Self.SirketTablo" />
+          <EntitySet Name="UnvanTablo" EntityType="Self.UnvanTablo" />
+          <AssociationSet Name="FK_PersonelTablosu_DepartmanTablo2" Association="Self.FK_PersonelTablosu_DepartmanTablo2">
+            <End Role="DepartmanTablo" EntitySet="DepartmanTablo" />
+            <End Role="PersonelTablosu" EntitySet="PersonelTablosu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonelTablosu_SirketTablo3" Association="Self.FK_PersonelTablosu_SirketTablo3">
+            <End Role="SirketTablo" EntitySet="SirketTablo" />
+            <End Role="PersonelTablosu" EntitySet="PersonelTablosu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonelTablosu_UnvanTablo3" Association="Self.FK_PersonelTablosu_UnvanTablo3">
+            <End Role="UnvanTablo" EntitySet="UnvanTablo" />
+            <End Role="PersonelTablosu" EntitySet="PersonelTablosu" />
+          </AssociationSet>
+          <EntitySet Name="BilgisayarTABLO" EntityType="dbPcKayitModel.BilgisayarTABLO" />
+          <EntitySet Name="ProgramTABLO" EntityType="dbPcKayitModel.ProgramTABLO" />
+          <AssociationSet Name="FK__Bilgisaya__Perso__3B0BC30C" Association="dbPcKayitModel.FK__Bilgisaya__Perso__3B0BC30C">
+            <End Role="PersonelTablosu" EntitySet="PersonelTablosu" />
+            <End Role="BilgisayarTABLO" EntitySet="BilgisayarTABLO" />
+          </AssociationSet>
+          <EntitySet Name="ProgramBilgisayar" EntityType="dbPcKayitModel.ProgramBilgisayar" />
+          <AssociationSet Name="FK__ProgramBi__Bilgi__43A1090D" Association="dbPcKayitModel.FK__ProgramBi__Bilgi__43A1090D">
+            <End Role="BilgisayarTABLO" EntitySet="BilgisayarTABLO" />
+            <End Role="ProgramBilgisayar" EntitySet="ProgramBilgisayar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProgramBi__Progr__44952D46" Association="dbPcKayitModel.FK__ProgramBi__Progr__44952D46">
+            <End Role="ProgramTABLO" EntitySet="ProgramTABLO" />
+            <End Role="ProgramBilgisayar" EntitySet="ProgramBilgisayar" />
+          </AssociationSet>
+          <EntitySet Name="KullaniciTablo" EntityType="dbPcKayitModel.KullaniciTablo" />
+          </EntityContainer>
+        <EntityType Name="BilgisayarTABLO">
+          <Key>
+            <PropertyRef Name="BilgisayarID" />
+          </Key>
+          <Property Name="BilgisayarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BilgisayarAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BilgisayarModeli" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PersonelID" Type="Int32" />
+          <Property Name="KurulumTarihi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="PersonelTablosu" Relationship="dbPcKayitModel.FK__Bilgisaya__Perso__3B0BC30C" FromRole="BilgisayarTABLO" ToRole="PersonelTablosu" />
+          <NavigationProperty Name="ProgramBilgisayar" Relationship="dbPcKayitModel.FK__ProgramBi__Bilgi__43A1090D" FromRole="BilgisayarTABLO" ToRole="ProgramBilgisayar" />
+        </EntityType>
+        <EntityType Name="ProgramTABLO">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProgramBilgisayar" Relationship="dbPcKayitModel.FK__ProgramBi__Progr__44952D46" FromRole="ProgramTABLO" ToRole="ProgramBilgisayar" />
+        </EntityType>
+        <Association Name="FK__Bilgisaya__Perso__3B0BC30C">
+          <End Type="dbPcKayitModel.PersonelTablosu" Role="PersonelTablosu" Multiplicity="0..1" />
+          <End Type="dbPcKayitModel.BilgisayarTABLO" Role="BilgisayarTABLO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonelTablosu">
+              <PropertyRef Name="PersonelID" />
+            </Principal>
+            <Dependent Role="BilgisayarTABLO">
+              <PropertyRef Name="PersonelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProgramBilgisayar">
+          <Key>
+            <PropertyRef Name="ComputerProgramID" />
+          </Key>
+          <Property Name="ComputerProgramID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BilgisayarID" Type="Int32" />
+          <Property Name="ProgramID" Type="Int32" />
+          <NavigationProperty Name="BilgisayarTABLO" Relationship="dbPcKayitModel.FK__ProgramBi__Bilgi__43A1090D" FromRole="ProgramBilgisayar" ToRole="BilgisayarTABLO" />
+          <NavigationProperty Name="ProgramTABLO" Relationship="dbPcKayitModel.FK__ProgramBi__Progr__44952D46" FromRole="ProgramBilgisayar" ToRole="ProgramTABLO" />
+        </EntityType>
+        <Association Name="FK__ProgramBi__Bilgi__43A1090D">
+          <End Type="dbPcKayitModel.BilgisayarTABLO" Role="BilgisayarTABLO" Multiplicity="0..1" />
+          <End Type="dbPcKayitModel.ProgramBilgisayar" Role="ProgramBilgisayar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BilgisayarTABLO">
+              <PropertyRef Name="BilgisayarID" />
+            </Principal>
+            <Dependent Role="ProgramBilgisayar">
+              <PropertyRef Name="BilgisayarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProgramBi__Progr__44952D46">
+          <End Type="dbPcKayitModel.ProgramTABLO" Role="ProgramTABLO" Multiplicity="0..1" />
+          <End Type="dbPcKayitModel.ProgramBilgisayar" Role="ProgramBilgisayar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramTABLO">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="ProgramBilgisayar">
+              <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="KullaniciTablo">
+          <Key>
+            <PropertyRef Name="KullaniciID" />
+          </Key>
+          <Property Name="KullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciGirisAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciSifre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciAdiGercek" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciMail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbPcKayitModelStoreContainer" CdmEntityContainer="dbPcKayitEntities3">
+          <EntitySetMapping Name="DepartmanTablo">
+            <EntityTypeMapping TypeName="dbPcKayitModel.DepartmanTablo">
+              <MappingFragment StoreEntitySet="DepartmanTablo">
+                <ScalarProperty Name="DepartmanID" ColumnName="DepartmanID" />
+                <ScalarProperty Name="DepartmanAdi" ColumnName="DepartmanAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonelTablosu">
+            <EntityTypeMapping TypeName="dbPcKayitModel.PersonelTablosu">
+              <MappingFragment StoreEntitySet="PersonelTablosu">
+                <ScalarProperty Name="PersonelID" ColumnName="PersonelID" />
+                <ScalarProperty Name="PersonelAdi" ColumnName="PersonelAdi" />
+                <ScalarProperty Name="UnvanID" ColumnName="UnvanID" />
+                <ScalarProperty Name="SirketID" ColumnName="SirketID" />
+                <ScalarProperty Name="DepartmanID" ColumnName="DepartmanID" />
+                <ScalarProperty Name="PersonelTel" ColumnName="PersonelTel" />
+                <ScalarProperty Name="PersonelMail" ColumnName="PersonelMail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SirketTablo">
+            <EntityTypeMapping TypeName="dbPcKayitModel.SirketTablo">
+              <MappingFragment StoreEntitySet="SirketTablo">
+                <ScalarProperty Name="SirketID" ColumnName="SirketID" />
+                <ScalarProperty Name="SirketAdi" ColumnName="SirketAdi" />
+                <ScalarProperty Name="SirketTel" ColumnName="SirketTel" />
+                <ScalarProperty Name="SirketAdres" ColumnName="SirketAdres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnvanTablo">
+            <EntityTypeMapping TypeName="dbPcKayitModel.UnvanTablo">
+              <MappingFragment StoreEntitySet="UnvanTablo">
+                <ScalarProperty Name="UnvanID" ColumnName="UnvanID" />
+                <ScalarProperty Name="UnvanAdi" ColumnName="UnvanAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BilgisayarTABLO">
+            <EntityTypeMapping TypeName="dbPcKayitModel.BilgisayarTABLO">
+              <MappingFragment StoreEntitySet="BilgisayarTABLO">
+                <ScalarProperty Name="KurulumTarihi" ColumnName="KurulumTarihi" />
+                <ScalarProperty Name="PersonelID" ColumnName="PersonelID" />
+                <ScalarProperty Name="BilgisayarModeli" ColumnName="BilgisayarModeli" />
+                <ScalarProperty Name="BilgisayarAdi" ColumnName="BilgisayarAdi" />
+                <ScalarProperty Name="BilgisayarID" ColumnName="BilgisayarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProgramTABLO">
+            <EntityTypeMapping TypeName="dbPcKayitModel.ProgramTABLO">
+              <MappingFragment StoreEntitySet="ProgramTABLO">
+                <ScalarProperty Name="ProgramAdi" ColumnName="ProgramAdi" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProgramBilgisayar">
+            <EntityTypeMapping TypeName="dbPcKayitModel.ProgramBilgisayar">
+              <MappingFragment StoreEntitySet="ProgramBilgisayar">
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="BilgisayarID" ColumnName="BilgisayarID" />
+                <ScalarProperty Name="ComputerProgramID" ColumnName="ComputerProgramID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KullaniciTablo">
+            <EntityTypeMapping TypeName="dbPcKayitModel.KullaniciTablo">
+              <MappingFragment StoreEntitySet="KullaniciTablo">
+                <ScalarProperty Name="KullaniciMail" ColumnName="KullaniciMail" />
+                <ScalarProperty Name="KullaniciAdiGercek" ColumnName="KullaniciAdiGercek" />
+                <ScalarProperty Name="KullaniciSifre" ColumnName="KullaniciSifre" />
+                <ScalarProperty Name="KullaniciGirisAdi" ColumnName="KullaniciGirisAdi" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
