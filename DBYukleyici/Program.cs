@@ -11,12 +11,12 @@ namespace DBYukleyici
     {
         static void Main(string[] args)
         {
-            string connectionString = "Data Source=.;Integrated Security=True";
+            string connectionString = @"Data Source=ENESPC;Integrated Security=True";
 
-            string createDatabaseQuery = "CREATE DATABASE DENEME";
+            string createDatabaseQuery = "CREATE DATABASE dbPcKayit";
 
             string createTablesQuery = @"
-            USE DENEME;
+            USE dbPcKayit;
 
             CREATE TABLE [dbo].[SirketTablo](
                 [SirketID] [int] IDENTITY(1,1) NOT NULL,
@@ -137,30 +137,113 @@ namespace DBYukleyici
             ALTER TABLE [dbo].[KullaniciTablo] ADD DEFAULT ('') FOR [KullaniciGirisAdi];
             ALTER TABLE [dbo].[KullaniciTablo] ADD DEFAULT ('') FOR [KullaniciSifre];
             
+            -- Örnek veriler ekleme
             INSERT INTO [dbo].[KullaniciTablo] (KullaniciAdiGercek, KullaniciMail, KullaniciGirisAdi, KullaniciSifre)
-            VALUES ('admin', 'admin', 'admin', 'admin');
+            VALUES ('Admin Kullanıcı', 'admin@sirket.com', 'admin', 'admin');
+
+            -- Şirket tablosuna örnek veri
+            INSERT INTO [dbo].[SirketTablo] (SirketAdi, SirketTel, SirketAdres)
+            VALUES ('Örnek Şirket A.Ş.', '0212 555 0001', 'İstanbul, Türkiye');
+
+            -- Departman tablosuna örnek veriler
+            INSERT INTO [dbo].[DepartmanTablo] (DepartmanAdi) VALUES 
+            ('Bilgi İşlem'),
+            ('İnsan Kaynakları'),
+            ('Muhasebe'),
+            ('Satış'),
+            ('Pazarlama');
+
+            -- Unvan tablosuna örnek veriler
+            INSERT INTO [dbo].[UnvanTablo] (UnvanAdi) VALUES 
+            ('Sistem Yöneticisi'),
+            ('Yazılım Geliştirici'),
+            ('Muhasebe Uzmanı'),
+            ('Satış Temsilcisi'),
+            ('Pazarlama Uzmanı'),
+            ('İK Uzmanı');
+
+            -- Program tablosuna örnek veriler
+            INSERT INTO [dbo].[ProgramTABLO] (ProgramAdi) VALUES 
+            ('Microsoft Office'),
+            ('Adobe Photoshop'),
+            ('AutoCAD'),
+            ('Visual Studio'),
+            ('Chrome Browser'),
+            ('TeamViewer'),
+            ('Antivirus Software');
             ";
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
+                    connection.Open();
+                    
+                    // Önce veritabanının var olup olmadığını kontrol et
+                    SqlCommand checkDbCommand = new SqlCommand("IF DB_ID('dbPcKayit') IS NOT NULL SELECT 1 ELSE SELECT 0", connection);
+                    int dbExists = (int)checkDbCommand.ExecuteScalar();
+                    
+                    if (dbExists == 1)
+                    {
+                        Console.WriteLine("dbPcKayit veritabanı zaten mevcut.");
+                        Console.WriteLine("Mevcut veritabanını silmek için 'E' yazın, çıkmak için herhangi bir tuşa basın:");
+                        string response = Console.ReadLine();
+                        
+                        if (response?.ToUpper() == "E")
+                        {
+                            SqlCommand dropDbCommand = new SqlCommand("DROP DATABASE dbPcKayit", connection);
+                            dropDbCommand.ExecuteNonQuery();
+                            Console.WriteLine("Mevcut veritabanı silindi.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("İşlem iptal edildi.");
+                            Console.ReadKey();
+                            return;
+                        }
+                    }
+
                     SqlCommand createDbCommand = new SqlCommand(createDatabaseQuery, connection);
                     SqlCommand createTablesCommand = new SqlCommand(createTablesQuery, connection);
 
-                    connection.Open();
                     createDbCommand.ExecuteNonQuery();
                     createTablesCommand.ExecuteNonQuery();
 
-                    Console.WriteLine("Veritabanı ve tablolar başarıyla oluşturuldu ve varsayılan kullanıcı eklendi.");
-                    Console.WriteLine("Giriş ID: admin");
+                    Console.WriteLine("✓ dbPcKayit veritabanı başarıyla oluşturuldu!");
+                    Console.WriteLine("✓ Tüm tablolar başarıyla oluşturuldu!");
+                    Console.WriteLine("✓ Örnek veriler eklendi!");
+                    Console.WriteLine("");
+                    Console.WriteLine("═══════════════════════════════════════");
+                    Console.WriteLine("           GİRİŞ BİLGİLERİ");
+                    Console.WriteLine("═══════════════════════════════════════");
+                    Console.WriteLine("Kullanıcı Adı: admin");
                     Console.WriteLine("Şifre: admin");
+                    Console.WriteLine("═══════════════════════════════════════");
+                    Console.WriteLine("");
+                    Console.WriteLine("Veritabanı kurulumu tamamlandı. Ana programı çalıştırabilirsiniz.");
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine("SQL Hatası: " + sqlEx.Message);
+                Console.WriteLine("Hata Numarası: " + sqlEx.Number);
+                
+                if (sqlEx.Number == 2)
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("SQL Server bağlantı hatası!");
+                    Console.WriteLine("Lütfen SQL Server'ın çalıştığından emin olun.");
+                    Console.WriteLine("SQL Server Express kullanıyorsanız, SQL Server Configuration Manager'dan");
+                    Console.WriteLine("SQL Server Browser servisinin çalıştığını kontrol edin.");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Bir hata oluştu: " + ex.Message);
+                Console.WriteLine("Genel Hata: " + ex.Message);
             }
+            
+            Console.WriteLine("");
+            Console.WriteLine("Devam etmek için herhangi bir tuşa basın...");
             Console.ReadKey();
         }
     }

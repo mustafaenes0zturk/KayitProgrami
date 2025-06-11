@@ -1,1 +1,121 @@
-# C# ve DevExpress kullanılarak yaptığım takip sistemi. Personel ve bilgisayar kayıtları, zimmet işlemleri, raporlama gibi özellikler içeriyor.
+# PC Kayıt Programı
+
+C# ve DevExpress ile geliştirilmiş personel ve bilgisayar takip sistemi.
+
+## 📸 Proje Görselleri
+
+### 🏠 Ana Sayfa
+![Ana Sayfa](projeiçerik/1anasayfa.png)
+*Modern arayüz ve hızlı erişim menüleri*
+
+### 🏢 Şirket Yönetimi
+![Şirket Listesi](projeiçerik/2sirketlistesi.png)
+*Şirket bilgileri ve departman yönetimi*
+
+### 👥 Personel Takibi
+![Personel Listesi](projeiçerik/3personellistesi.png)
+*Detaylı personel kayıtları ve bilgi yönetimi*
+
+### 💻 Bilgisayar Envanteri
+![PC Listesi](projeiçerik/4pclistesi.png)
+*Bilgisayar zimmet takibi ve donanım bilgileri*
+
+### ⚙️ Admin Paneli
+![Admin İşlemleri](projeiçerik/5adminislemleri.png)
+*Kullanıcı yönetimi ve sistem ayarları*
+
+### 🎨 Tema Ayarları
+![Tema Ayarları](projeiçerik/6temaayarlari.png)
+*DevExpress tema desteği ve görsel özelleştirme*
+
+### 📊 Rapor Sistemi
+![Rapor Örneği](projeiçerik/7raporornek.png)
+*Detaylı raporlama ve Excel export özellikleri*
+
+## ✨ Özellikler
+
+- 👥 **Personel Yönetimi** - Ekle, düzenle, sil, detaylı kayıtlar
+- 💻 **Bilgisayar Takibi** - Donanım envanteri ve zimmet işlemleri  
+- 🏢 **Şirket Yönetimi** - Departman ve unvan organizasyonu
+- 📊 **Raporlama** - Excel export ve detaylı raporlar
+- 🔐 **Kullanıcı Sistemi** - Yetki bazlı erişim kontrolü
+- 🎨 **Modern UI** - DevExpress tema desteği
+- 🗄️ **Güvenli Veritabanı** - SQL Server entegrasyonu
+
+## 🚀 Hızlı Kurulum
+
+### Gereksinimler
+- Windows 10/11
+- .NET Framework 4.8
+- SQL Server Express (otomatik kurulur)
+
+### Kurulum Adımları
+
+1. **Otomatik Kurulum**
+   ```
+   Setup/install.bat (Yönetici olarak çalıştır)
+   ```
+
+2. **Veritabanı Oluştur**
+   ```
+   DBYukleyici/DBYukleyici.exe
+   ```
+
+3. **Programı Başlat**
+   ```
+   pcKayitProgram/pcKayitProgram.exe
+   ```
+
+### Giriş Bilgileri
+- **Kullanıcı:** `admin`
+- **Şifre:** `admin`
+
+## ⚙️ Farklı Bilgisayarda Kurulum
+
+### Aynı Ağdaki Bilgisayar
+```bash
+# Server ayarlarını değiştir
+Setup/config-server.bat
+
+# Server adını gir (örn: BILGISAYAR-ADI)
+```
+
+### Portable Paket Oluştur
+```bash
+Setup/create-portable.bat
+```
+
+## 🛠️ Sorun Giderme
+
+```bash
+# Sistem kontrolü
+Setup/system-check.bat
+
+# Bağlantı problemi
+Setup/config-server.bat
+```
+
+## 📂 Klasör Yapısı
+
+```
+├── pcKayitProgram/     # Ana program
+├── DBYukleyici/        # Veritabanı kurulum
+├── Setup/              # Kurulum araçları
+│   ├── install.bat     # Otomatik kurulum
+│   ├── config-server.bat
+│   ├── create-portable.bat
+│   └── system-check.bat
+└── projeiçerik/        # Proje görselleri
+```
+
+## 🔧 Manuel Kurulum
+
+1. SQL Server Express kur
+2. `DBYukleyici/Program.cs` dosyasında connection string düzenle
+3. `pcKayitProgram/App.config` dosyasında server adını değiştir
+4. DBYukleyici'yi çalıştır
+5. Ana programı başlat
+
+---
+
+**Version:** 1.0 | **Developer:** Mustafa Enes Öztürk

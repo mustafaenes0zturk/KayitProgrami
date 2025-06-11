@@ -37,9 +37,11 @@
             this.btnBilgisayarSilFormu = new DevExpress.XtraBars.BarButtonItem();
             this.btnBilgisayarGuncelleFormu = new DevExpress.XtraBars.BarButtonItem();
             this.btnBilgisayarRapor = new DevExpress.XtraBars.BarButtonItem();
+            this.btnCikis = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -49,8 +51,6 @@
             this.PersonelAdi = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colKurulumTarihi = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bilgisayarTABLOBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.btnCikis = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -108,6 +108,14 @@
             this.btnBilgisayarRapor.Name = "btnBilgisayarRapor";
             this.btnBilgisayarRapor.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBilgisayarRapor_ItemClick);
             // 
+            // btnCikis
+            // 
+            this.btnCikis.Caption = "Çıkış";
+            this.btnCikis.Id = 5;
+            this.btnCikis.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnCikis.ImageOptions.SvgImage")));
+            this.btnCikis.Name = "btnCikis";
+            this.btnCikis.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCikis_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -128,6 +136,12 @@
             // 
             this.ribbonPageGroup2.ItemLinks.Add(this.btnBilgisayarRapor);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            // 
+            // ribbonPageGroup3
+            // 
+            this.ribbonPageGroup3.Alignment = DevExpress.XtraBars.Ribbon.RibbonPageGroupAlignment.Far;
+            this.ribbonPageGroup3.ItemLinks.Add(this.btnCikis);
+            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             // 
             // gridControl1
             // 
@@ -205,20 +219,6 @@
             // bilgisayarTABLOBindingSource
             // 
             this.bilgisayarTABLOBindingSource.DataSource = typeof(pcKayitProgram.Entity.BilgisayarTABLO);
-            // 
-            // ribbonPageGroup3
-            // 
-            this.ribbonPageGroup3.Alignment = DevExpress.XtraBars.Ribbon.RibbonPageGroupAlignment.Far;
-            this.ribbonPageGroup3.ItemLinks.Add(this.btnCikis);
-            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
-            // 
-            // btnCikis
-            // 
-            this.btnCikis.Caption = "Çıkış";
-            this.btnCikis.Id = 5;
-            this.btnCikis.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
-            this.btnCikis.Name = "btnCikis";
-            this.btnCikis.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCikis_ItemClick);
             // 
             // FormBilgisayarListesi
             // 
