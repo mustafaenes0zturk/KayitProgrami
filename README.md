@@ -30,7 +30,7 @@ C# ve DevExpress ile geliştirilmiş personel ve bilgisayar takip sistemi.
 
 ### 📊 Rapor Sistemi
 ![Rapor Örneği](projeiçerik/7raporornek.png)
-*Detaylı raporlama ve Excel export özellikleri*
+*Detaylı raporlama ve export özellikleri*
 
 ## ✨ Özellikler
 
