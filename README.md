@@ -42,73 +42,16 @@ C# ve DevExpress ile geliştirilmiş personel ve bilgisayar takip sistemi.
 - 🎨 **Modern UI** - DevExpress tema desteği
 - 🗄️ **Güvenli Veritabanı** - SQL Server entegrasyonu
 
-## 🚀 Hızlı Kurulum
-
-### Gereksinimler
-- Windows 10/11
-- .NET Framework 4.8
-- SQL Server Express (otomatik kurulur)
-
-### Kurulum Adımları
-
-1. **Otomatik Kurulum**
-   ```
-   Setup/install.bat (Yönetici olarak çalıştır)
-   ```
-
-2. **Veritabanı Oluştur**
-   ```
-   DBYukleyici/DBYukleyici.exe
-   ```
-
-3. **Programı Başlat**
-   ```
-   pcKayitProgram/pcKayitProgram.exe
-   ```
-
-### Giriş Bilgileri
-- **Kullanıcı:** `admin`
-- **Şifre:** `admin`
-
-## ⚙️ Farklı Bilgisayarda Kurulum
-
-### Aynı Ağdaki Bilgisayar
-```bash
-# Server ayarlarını değiştir
-Setup/config-server.bat
-
-# Server adını gir (örn: BILGISAYAR-ADI)
-```
-
-### Portable Paket Oluştur
-```bash
-Setup/create-portable.bat
-```
-
-## 🛠️ Sorun Giderme
-
-```bash
-# Sistem kontrolü
-Setup/system-check.bat
-
-# Bağlantı problemi
-Setup/config-server.bat
-```
 
 ## 📂 Klasör Yapısı
 
 ```
 ├── pcKayitProgram/     # Ana program
 ├── DBYukleyici/        # Veritabanı kurulum
-├── Setup/              # Kurulum araçları
-│   ├── install.bat     # Otomatik kurulum
-│   ├── config-server.bat
-│   ├── create-portable.bat
-│   └── system-check.bat
 └── projeiçerik/        # Proje görselleri
 ```
 
-## 🔧 Manuel Kurulum
+## 🔧 Kurulum
 
 1. SQL Server Express kur
 2. `DBYukleyici/Program.cs` dosyasında connection string düzenle
