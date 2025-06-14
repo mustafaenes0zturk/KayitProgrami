@@ -265,7 +265,7 @@ namespace pcKayitProgram.Helpers
     <div class='container'>
         <div class='header'>
             <div class='logo'>PC</div>
-            <h1>PC Kayît Sistemi</h1>
+            <h1>PC Kayıt Sistemi</h1>
             <p class='subtitle'>Bilgisayar Detay Bilgileri</p>
         </div>
 
