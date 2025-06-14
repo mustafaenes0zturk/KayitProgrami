@@ -3,6 +3,7 @@ using DevExpress.Skins;
 using DevExpress.UserSkins;
 using DevExpress.XtraSplashScreen;
 using pcKayitProgram.Formlar;
+using pcKayitProgram.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Text;
@@ -23,6 +24,17 @@ namespace pcKayitProgram
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            // QR Kod Web Sunucusunu Başlat
+            bool serverStarted = WebServerHelper.StartServer();
+            if (serverStarted)
+            {
+                System.Diagnostics.Debug.WriteLine("✅ QR Kod Web Sunucusu otomatik başlatıldı!");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("⚠️ QR Kod Web Sunucusu başlatılamadı!");
+            }
+
             string tema = Properties.Settings.Default.Tema;
             if (!String.IsNullOrEmpty(tema))
             {
@@ -39,7 +51,10 @@ namespace pcKayitProgram
             else
             {
                 Application.Exit();
-            }    
+            }
+
+            // Uygulama kapanırken sunucuyu durdur
+            WebServerHelper.StopServer();
         }
     }
 }

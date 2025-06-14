@@ -32,22 +32,27 @@ namespace pcKayitProgram.Helpers
         /// </summary>
         private static string CreateQRDataString(int bilgisayarID, string bilgisayarAdi, string bilgisayarModeli, string personelAdi, DateTime kurulumTarihi)
         {
-            // URL encode için gerekli karakterleri temizle
+            // URL encode için gerekli karakterleri temizle ve kısa tut
             string cleanPcAdi = Uri.EscapeDataString(bilgisayarAdi ?? "N/A");
             string cleanModel = Uri.EscapeDataString(bilgisayarModeli ?? "N/A");
             string cleanPersonel = Uri.EscapeDataString(personelAdi ?? "N/A");
             string cleanKurulum = Uri.EscapeDataString(kurulumTarihi.ToString("dd.MM.yyyy"));
-            string cleanTarih = Uri.EscapeDataString(DateTime.Now.ToString("dd.MM.yyyy HH:mm"));
 
-            // Web sayfası URL'si oluştur (lokal test için)
-            var url = $"http://localhost:8080/bilgisayar-detay.html?" +
+            // Web sayfası URL'si oluştur (dinamik port ile)
+            int port = WebServerHelper.IsRunning ? WebServerHelper.Port : 8080;
+            var url = $"http://localhost:{port}/bilgisayar-detay.html?" +
                      $"id={bilgisayarID}&" +
                      $"ad={cleanPcAdi}&" +
                      $"model={cleanModel}&" +
                      $"personel={cleanPersonel}&" +
                      $"kurulum={cleanKurulum}";
             
-            // URL'nin çok uzun olmaması için tarih parametresini kaldırdık
+            // URL uzunluğunu kontrol et (QR kod için maksimum ~2000 karakter önerilir)
+            if (url.Length > 1500)
+            {
+                // Çok uzunsa sadece ID ve temel bilgileri içer
+                url = $"http://localhost:8080/bilgisayar-detay.html?id={bilgisayarID}&ad={Uri.EscapeDataString((bilgisayarAdi ?? "PC").Substring(0, Math.Min(20, (bilgisayarAdi ?? "PC").Length)))}";
+            }
             
             return url;
         }
@@ -59,12 +64,15 @@ namespace pcKayitProgram.Helpers
         {
             try
             {
-                // Google Charts QR Code API URL'si
+                // Google Charts QR Code API URL'si - daha kararlı API endpoint
                 string encodedData = Uri.EscapeDataString(data);
-                string apiUrl = $"https://chart.googleapis.com/chart?chs={width}x{height}&cht=qr&chl={encodedData}";
+                string apiUrl = $"https://api.qrserver.com/v1/create-qr-code/?size={width}x{height}&data={encodedData}";
 
                 using (WebClient webClient = new WebClient())
                 {
+                    // User-Agent header ekleyelim
+                    webClient.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
+                    
                     byte[] imageBytes = webClient.DownloadData(apiUrl);
                     using (MemoryStream ms = new MemoryStream(imageBytes))
                     {
@@ -72,8 +80,11 @@ namespace pcKayitProgram.Helpers
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                // Hata detayını loglayalım
+                System.Diagnostics.Debug.WriteLine($"QR Kod oluşturma hatası: {ex.Message}");
+                
                 // Hata durumunda basit QR kod benzeri görsel oluştur
                 return CreateSimpleQRCode(data, width, height);
             }

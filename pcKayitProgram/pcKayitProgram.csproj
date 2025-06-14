@@ -201,6 +201,7 @@
       <DependentUpon>FormQRCodeEtiket.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\QRCodeHelper.cs" />
+    <Compile Include="Helpers\WebServerHelper.cs" />
     <Compile Include="Formlar\AnaFormlar\FormKullaniciListesi.cs">
       <SubType>Form</SubType>
     </Compile>
