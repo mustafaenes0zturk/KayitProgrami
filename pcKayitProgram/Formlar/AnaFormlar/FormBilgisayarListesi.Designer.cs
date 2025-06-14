@@ -36,6 +36,7 @@
             this.btnYeniBilgisayarFormu = new DevExpress.XtraBars.BarButtonItem();
             this.btnBilgisayarSilFormu = new DevExpress.XtraBars.BarButtonItem();
             this.btnBilgisayarGuncelleFormu = new DevExpress.XtraBars.BarButtonItem();
+            this.btnQRCodeEtiket = new DevExpress.XtraBars.BarButtonItem();
             this.btnBilgisayarRapor = new DevExpress.XtraBars.BarButtonItem();
             this.btnCikis = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -67,10 +68,11 @@
             this.btnYeniBilgisayarFormu,
             this.btnBilgisayarSilFormu,
             this.btnBilgisayarGuncelleFormu,
+            this.btnQRCodeEtiket,
             this.btnBilgisayarRapor,
             this.btnCikis});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 6;
+            this.ribbonControl1.MaxItemId = 7;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -99,6 +101,14 @@
             this.btnBilgisayarGuncelleFormu.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnBilgisayarGuncelleFormu.ImageOptions.SvgImage")));
             this.btnBilgisayarGuncelleFormu.Name = "btnBilgisayarGuncelleFormu";
             this.btnBilgisayarGuncelleFormu.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBilgisayarGuncelleFormu_ItemClick);
+            // 
+            // btnQRCodeEtiket
+            // 
+            this.btnQRCodeEtiket.Caption = "QR Kod Etiket Oluştur";
+            this.btnQRCodeEtiket.Id = 6;
+            this.btnQRCodeEtiket.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnQRCodeEtiket.ImageOptions.SvgImage")));
+            this.btnQRCodeEtiket.Name = "btnQRCodeEtiket";
+            this.btnQRCodeEtiket.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnQRCodeEtiket_ItemClick);
             // 
             // btnBilgisayarRapor
             // 
@@ -130,6 +140,7 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.btnYeniBilgisayarFormu);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnBilgisayarSilFormu);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnBilgisayarGuncelleFormu);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnQRCodeEtiket);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
             // ribbonPageGroup2
@@ -246,6 +257,7 @@
         private DevExpress.XtraBars.BarButtonItem btnYeniBilgisayarFormu;
         private DevExpress.XtraBars.BarButtonItem btnBilgisayarSilFormu;
         private DevExpress.XtraBars.BarButtonItem btnBilgisayarGuncelleFormu;
+        private DevExpress.XtraBars.BarButtonItem btnQRCodeEtiket;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraGrid.GridControl gridControl1;

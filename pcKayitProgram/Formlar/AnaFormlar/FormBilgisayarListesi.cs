@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraReports.UI;
 using pcKayitProgram.Entity;
+using pcKayitProgram.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -215,6 +216,39 @@ namespace pcKayitProgram.Formlar
         private void btnCikis_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnQRCodeEtiket_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var selectedRow = gridView1.GetFocusedRowCellValue("BilgisayarID");
+            if (selectedRow == null)
+            {
+                XtraMessageBox.Show("Lütfen QR kod etiketi oluşturmak için bir bilgisayar seçin.",
+                    "Uyarı",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                int BilgisayarID = Convert.ToInt32(gridView1.GetFocusedRowCellValue("BilgisayarID"));
+                string BilgisayarAdi = gridView1.GetFocusedRowCellValue("BilgisayarAdi")?.ToString() ?? "";
+                string BilgisayarModeli = gridView1.GetFocusedRowCellValue("BilgisayarModeli")?.ToString() ?? "";
+                string PersonelAdi = gridView1.GetFocusedRowCellValue("PersonelAdi")?.ToString() ?? "";
+                DateTime kurulumTarihi = Convert.ToDateTime(gridView1.GetFocusedRowCellValue("KurulumTarihi"));
+
+                // QR kod etiket formunu aç
+                FormQRCodeEtiket qrForm = new FormQRCodeEtiket(BilgisayarID, BilgisayarAdi, BilgisayarModeli, PersonelAdi, kurulumTarihi);
+                qrForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"QR kod etiketi oluşturulurken hata oluştu: {ex.Message}",
+                    "Hata",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Kayıt Sistemi - Bilgisayar Detayları</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 14px;
+        }
+
+        .info-value {
+            color: #212529;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .pc-id {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status {
+            background: #28a745;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+            font-size: 12px;
+        }
+
+        .qr-info {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #1565c0;
+            font-size: 13px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">PC</div>
+            <h1>PC Kayıt Sistemi</h1>
+            <p class="subtitle">Bilgisayar Detay Bilgileri</p>
+        </div>
+
+        <div class="info-card">
+            <div class="info-row">
+                <span class="info-label">PC ID:</span>
+                <span class="pc-id" id="pcId">-</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Bilgisayar Adı:</span>
+                <span class="info-value" id="pcAdi">-</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Model:</span>
+                <span class="info-value" id="pcModel">-</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Zimmetli Personel:</span>
+                <span class="info-value" id="personel">-</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Kurulum Tarihi:</span>
+                <span class="info-value" id="kurulum">-</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Durum:</span>
+                <span class="status">Aktif</span>
+            </div>
+        </div>
+
+        <div class="qr-info">
+            <strong>📱 QR Kod Tarandı!</strong><br>
+            Bu bilgiler QR kod taraması ile otomatik olarak yüklendi.
+        </div>
+
+        <div class="footer">
+            <p>Son güncelleme: <span id="tarih">-</span></p>
+            <p>© 2024 PC Kayıt Sistemi - Tüm hakları saklıdır.</p>
+        </div>
+    </div>
+
+    <script>
+        // URL parametrelerini al
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Sayfa yüklendiğinde bilgileri doldur
+        window.onload = function() {
+            document.getElementById('pcId').textContent = getUrlParameter('id') || 'Bilinmiyor';
+            document.getElementById('pcAdi').textContent = getUrlParameter('ad') || 'Bilinmiyor';
+            document.getElementById('pcModel').textContent = getUrlParameter('model') || 'Bilinmiyor';
+            document.getElementById('personel').textContent = getUrlParameter('personel') || 'Bilinmiyor';
+            document.getElementById('kurulum').textContent = getUrlParameter('kurulum') || 'Bilinmiyor';
+            document.getElementById('tarih').textContent = getUrlParameter('tarih') || 'Bilinmiyor';
+
+            // Sayfa başlığını güncelle
+            var pcAdi = getUrlParameter('ad');
+            if (pcAdi) {
+                document.title = `PC Kayıt - ${pcAdi}`;
+            }
+        }
+
+        // Sayfa yüklenme animasyonu
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 0.5s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html> 

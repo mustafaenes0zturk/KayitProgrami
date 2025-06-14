@@ -20,6 +20,10 @@ C# ve DevExpress ile geliştirilmiş personel ve bilgisayar takip sistemi.
 ![PC Listesi](projeiçerik/4pclistesi.png)
 *Bilgisayar zimmet takibi ve donanım bilgileri*
 
+### 💻 Bilgisayar Etiketi ve QR Kodu Oluşturma
+![PC Listesi](projeiçerik/4-2qrpc.png)
+![PC Listesi](projeiçerik/4-3qrweb.png)
+
 ### ⚙️ Admin Paneli
 ![Admin İşlemleri](projeiçerik/5adminislemleri.png)
 *Kullanıcı yönetimi ve sistem ayarları*
